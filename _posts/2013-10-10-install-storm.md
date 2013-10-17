@@ -110,7 +110,7 @@ Storm集群的默认参数的值可以参考网站：[Storm配置参数默认值
 在supervisor上的storm文件夹内执行：bin/storm supervisor > /dev/null 2>&1 &
 
 ####(3)监控页面的启动
-在master节点上的storm文件夹内执行：bin/storm ui > /dev/mnull 2>&1 &
+在master节点上的storm文件夹内执行：bin/storm ui > /dev/null 2>&1 &
 
 
 **注意**:可以用jps查看进程启动是否成功，在logs下的log文件中查看启动情况
