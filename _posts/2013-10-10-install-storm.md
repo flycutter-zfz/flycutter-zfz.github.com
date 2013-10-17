@@ -54,6 +54,7 @@ jzmq的安装需要依赖pkg-config, autoconf, configure的过程中需要JAVA_H
 	sudo make install
 
 在make的时候会发生错误，参考了第三篇文章的内容终于解决了
+
 	make//出现错误，提示classdist_noinst.stamp这货不存在，也没规则可以建立
 	//解决办法
 	touch src/classdist_noinst.stamp
