@@ -12,46 +12,44 @@ tags: [机器学习]
 ##2. 使用方法
 
 ###(1)代码
-
-	import java.io.StringReader;
-
-	import net.paoding.analysis.analyzer.PaodingAnalyzer;
-
-	import org.apache.lucene.analysis.Analyzer;
-	import org.apache.lucene.analysis.TokenStream;
-	import org.apache.lucene.analysis.tokenattributes.TermAttribute;
+{% highlight java %}
+import java.io.StringReader;
+import net.paoding.analysis.analyzer.PaodingAnalyzer;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.tokenattributes.TermAttribute;
 
 
-	public class ChineseAnalyzer {
-		public static void main(String[] args)throws Exception{
-			String strZH = "核心提示，据媒体报道：" +
-					"美国正在计划大规模扩张在亚洲的导弹防御系统。" +
-					"8月23日，美国国务院回应称，此举意在抵御来自朝鲜的导弹威胁，" + 
-					"而不是针对中国。美国表示，美国通过美中军事对话以及美中战略与" + 
-					"经济对话等机制，已经就该导弹防御系统的意图与中国进行了广泛的对话。";
-			
-			Analyzer analyzer = new PaodingAnalyzer();
-			showAnalyzer(analyzer, strZH);
-			
-		}
+public class ChineseAnalyzer {
+	public static void main(String[] args)throws Exception{
+		String strZH = "核心提示，据媒体报道：" +
+				"美国正在计划大规模扩张在亚洲的导弹防御系统。" +
+				"8月23日，美国国务院回应称，此举意在抵御来自朝鲜的导弹威胁，" + 
+				"而不是针对中国。美国表示，美国通过美中军事对话以及美中战略与" + 
+				"经济对话等机制，已经就该导弹防御系统的意图与中国进行了广泛的对话。";
 		
-		public static void showAnalyzer(Analyzer analyzer, String str)throws Exception{
-			long start = System.currentTimeMillis();
-			System.out.println("\n" + analyzer.getClass().getSimpleName());
-			StringReader reader = new StringReader(str);
-			TokenStream ts = analyzer.tokenStream("", reader);
-			TermAttribute termAttribute = ts.getAttribute(TermAttribute.class);
-			
-			long end = System.currentTimeMillis();
-			long time = end - start;
-			System.out.println("耗时：" + time);
-			
-			while(ts.incrementToken()){
-				System.out.println(termAttribute.term() + "|");
-			}
+		Analyzer analyzer = new PaodingAnalyzer();
+		showAnalyzer(analyzer, strZH);
+		
+	}
+	
+	public static void showAnalyzer(Analyzer analyzer, String str)throws Exception{
+		long start = System.currentTimeMillis();
+		System.out.println("\n" + analyzer.getClass().getSimpleName());
+		StringReader reader = new StringReader(str);
+		TokenStream ts = analyzer.tokenStream("", reader);
+		TermAttribute termAttribute = ts.getAttribute(TermAttribute.class);
+		
+		long end = System.currentTimeMillis();
+		long time = end - start;
+		System.out.println("耗时：" + time);
+		
+		while(ts.incrementToken()){
+			System.out.println(termAttribute.term() + "|");
 		}
 	}
-
+}
+{% endhighlight %}
 ###(2)jar包
 
 &nbsp;&nbsp;&nbsp;&nbsp;需要依赖lucene的jar包：lucene-analyzers-3.0.3.jar，lucene-core-3.0.3.jar，lucene-highlighter-3.0.3.jar；直接使用庖丁分词的paoding-analysis-2.0.4-beta.zip中的jar包会抛异常：Exception in thread "main" java.lang.AbstractMethodError: org.apache.lucene.analysis.TokenStream.incrementToken()。通过svn check下代码后，自己ant一下，得到的jar包是可以用的。

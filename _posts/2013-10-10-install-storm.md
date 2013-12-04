@@ -22,53 +22,52 @@ Storm的搭建过程主要是以下几步：安装zeromq，安装jzmq，安装ja
 安装环境：Ubuntu Server 12.04
 
 ####(1)安装jdk，设置JAVA_HOME
-	
-	sudo apt-get install openjdk-7-jdk
-
-	//编辑/etc/environment，添加：
-	JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk-amd64"
-	//然后
-	source /etc/environment
-
+{% highlight bash %}
+sudo apt-get install openjdk-7-jdk
+//编辑/etc/environment，添加：
+JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk-amd64"
+//然后
+source /etc/environment
+{% endhighlight %}
 ####(2)安装ZooKeeper
 
 
 ####(3)安装zeromq
 zeromq的安装需要gcc、g++等编译环境，uuid-dev等工具，以及make工具，所以可以先安装这些工具，当然也可以在下面步骤的出错信息提示后，再进行安装：
-
-	wget http://download.zeromq.org/zeromq-2.1.7.tar.gz
-	tar -xzf zeromq-2.1.7.tar.gz
-	cd zeromq-2.1.7
-	./configure
-	make
-	sudo make install
-
+{% highlight bash%}
+wget http://download.zeromq.org/zeromq-2.1.7.tar.gz
+tar -xzf zeromq-2.1.7.tar.gz
+cd zeromq-2.1.7
+./configure
+make
+sudo make install
+{% endhighlight %}
 ####(4)安装jzmq
 jzmq的安装需要依赖pkg-config, autoconf, configure的过程中需要JAVA_HOME环境变量：
-
-	git clone https://github.com/nathanmarz/jzmq.git
-	cd jzmq
-	./autogen.sh
-	./configure
-	make
-	sudo make install
-
+{% highlight bash%}
+git clone https://github.com/nathanmarz/jzmq.git
+cd jzmq
+./autogen.sh
+./configure
+make
+sudo make install
+{% endhighlight %}
 在make的时候会发生错误，参考了第三篇文章的内容终于解决了
+{% highlight bash%}
+make
+#出现错误，提示classdist_noinst.stamp这货不存在，也没规则可以建立
+#解决办法
+touch src/classdist_noinst.stamp
+make 
+#还是会出现错误，提示没有规则去make org/zeromq/ZMQException.class
+#解决办法
+cd src/org/zeromq
+javac *.java
+cd ../../..
 
-	make//出现错误，提示classdist_noinst.stamp这货不存在，也没规则可以建立
-	//解决办法
-	touch src/classdist_noinst.stamp
-
-	make //还是会出现错误，提示没有规则去make org/zeromq/ZMQException.class
-
-	//解决办法
-	cd src/org/zeromq
-	javac *.java
-	cd ../../..
-
-	make
-	//ok了
-
+make
+#ok了
+{% endhighlight %}
 ###3. Storm集群的配置
 
 Storm集群的默认参数的值可以参考网站：[Storm配置参数默认值](https://github.com/nathanmarz/storm/blob/master/conf/defaults.yaml?spm=0.0.0.0.Hh0Fp5&file=defaults.yaml)

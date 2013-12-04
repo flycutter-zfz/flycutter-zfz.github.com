@@ -13,31 +13,33 @@ tags: [排序]
 ##2. 代码
 
 ###递增排序
-	void insert_sort_inc(int *a, int n){
-		for(int i=1; i<n; i++){
-			int key = a[i];
-			int j = i-1;
-			while(j>=0 && a[j]>key){
-				a[j+1]=a[j];
-				j--;
-			}
-			a[j+1] = key;
+{% highlight c++ %}
+void insert_sort_inc(int *a, int n){
+	for(int i=1; i<n; i++){
+		int key = a[i];
+		int j = i-1;
+		while(j>=0 && a[j]>key){
+			a[j+1]=a[j];
+			j--;
 		}
+		a[j+1] = key;
 	}
-
+}
+{% endhighlight %}
 ###递减排序
-	void insert_sort_dec(int *a, int n){
-		for(int i=1; i<n; i++){
-			int key = a[i];
-			int j = i - 1;
-			while(j>=0 && a[j]<key){
-				a[j+1]=a[j];
-				j--;
-			}
-			a[j+1] = key;
-		}
+{% highlight c++ %}
+void insert_sort_dec(int *a, int n){
+    for(int i=1; i<n; i++){
+    	int key = a[i];
+    	int j = i - 1;
+   		while(j>=0 && a[j]<key){
+    		a[j+1]=a[j];
+    		j--;
+    	}
+    	a[j+1] = key;
 	}
-
+}
+ {% endhighlight %}
 ##3. 算法分析
 
 **最好情况** ：最好的情况是输入时已经按照所求的顺序排列，此时内部的循环总是第一次就跳出，所以时间复杂度为：n；
