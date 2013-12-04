@@ -13,6 +13,7 @@ tags: [排序]
 ##2. 代码
 
 ###递增排序
+    {% highlight c++ %}
 	void choose_sort_inc(int *a, int n){
 		for(int i=0;i<n-1;i++){
 			int min_index = i;
@@ -26,7 +27,7 @@ tags: [排序]
 			a[i] = tmp;
 		}	
 	}
-
+    {% endhighlight %}
 ###递减排序
 	void choose_sort_dec(int *a, int n){
 		for(int i=0;i<n-1;i++){
