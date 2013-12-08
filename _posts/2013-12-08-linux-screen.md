@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux screen
-description: 
+description: Linux screen命令的使用
 category: "tools"
 tags: [运维]
 ---
