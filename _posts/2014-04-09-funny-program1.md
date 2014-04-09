@@ -2,7 +2,7 @@
 layout: post
 title: "Funny Programs"
 description: ""
-category: ""
+category: "algorithm"
 tags: []
 ---
 
@@ -16,9 +16,11 @@ int func(int n){
 	}
 	return count;
 }
+{% endhighlight %}
 
+{% highlight c++ %}
 int main(){
-	cout << func(9999) << endl;      //输出8，二进制表达式中有8个1
-	return 0;
+    cout << func(9999) << endl;
 }
 {% endhighlight %}
+
